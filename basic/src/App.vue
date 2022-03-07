@@ -3,10 +3,11 @@
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 import HelloWorld from "/@components/HelloWorld.vue";
 import Practices1 from "/@components/Practices1.vue";
+import Practices2 from "/@components/Practices2.vue";
 </script>
 
 <template>
-  <Practices1 />
+  <Practices2 />
 </template>
 
 <style>
