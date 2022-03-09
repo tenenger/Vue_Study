@@ -1,14 +1,16 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from "/@components/HelloWorld.vue";
-import Practices1 from "/@components/Practices1.vue";
-import Practices2 from "/@components/Practices2.vue";
-import PT3Parent from "/@components/PT3Parent.vue";
+<script>
+import { Practices01, Practices02 } from "/@components/index.vue";
+
+// import하는 컴포넌트가 있으면, 이를 이용하겠다고 작성해줘야 에러가 안난다.
+export default {
+    components: {
+        Practices01,
+    },
+};
 </script>
 
 <template>
-    <PT3Parent />
+    <Practices01></Practices01>
 </template>
 
 <style>

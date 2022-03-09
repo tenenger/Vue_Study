@@ -3,48 +3,68 @@ import App from "./App.vue";
 
 createApp(App).mount("#app");
 
-// Vue 애플리케이션 생성
+// // 컴포넌트 생성하여 사용하려면, vite.config.js 파일에 vue의 경로를 수정해야한다.
+// import { createApp, ref } from "vue";
+
+// // 어플리케이션 인스턴스 app 생성
 // const app = createApp({});
 
-// // button-counter라는 새로운 전역 컴포넌트 정의
-// app.component("button-counter", {
-//     // index.html에서 받은 props를 옵션을 이용해 점검할 수 있다.
+// // 하위 컴포넌트 모두가 사용할 수 있는 값(inject)를 provide로 제공한다.
+// // 첫번째 매개변수는 변수명, 두번째 매개변수는 값이다.
+// app.provide("counter_header", "Counter ");
+
+// // app.component는 2개의 매개변수를 받는데, 첫번째는 신규 컴포넌트를 받는다.
+// // 두번째 매개변수는 신규 컴포넌트의 내용이다.
+// // 신규 컴포넌트 counter를 app에 등록
+// app.component("counter", {
+//     // inject 메서드를 사용하여, provide값을 사용할 수 있다.
+//     inject: ["counter_header"],
+
+//     setup() {
+//         const count = ref(0);
+//         return { count };
+//     },
+
+//     // 화면에 표시할 template를 생성한다.
+//     template: `
+//         <span>{{ counter_header }}</span>
+//         <button @click="count++" v-text="count" />
+//         <hr/>
+//     `,
+// });
+
+// // config 속성의 globalProperties에는 title이라는 키를 이용해 전역 변수(부모 element까지만)를 선언한다.
+// app.config.globalProperties.title = "Vue 3 Demo";
+
+// // 신규 컴포넌트 MyComponent app에 등록
+// // 주의할점은 컴포넌트 이름명은 camelcase가 강제로 케밥케이스로 변경되기 때문에, DOM에 사용할 인스턴스는 처음부터 케밥케이스로 이름을 짓는다.
+// app.component("my_component", {
+//     // props는 컴포넌트에 데이터를 넘겨줄 수 있는 사용자 지정 속성이다.
+//     // 넘겨줄 props의 상세 정보를 지정할 수 있다.
 //     props: {
 //         title: {
 //             type: String,
 //             required: true,
-//             default: "default",
 //             validator: function (value) {
 //                 return typeof value == String;
 //             },
 //         },
-//         arr: {
+//         data: {
 //             type: Object,
-//             required: true,
-//             default: [4, 5, 6],
-//             validator: function (value) {
-//                 return typeof value == Object;
+//             default: () => {
+//                 return [];
 //             },
 //         },
 //     },
-//     // non-prop을 사용하기 위해서는 setup함수의 두번째 매개변수인 context를 이용해야한다. context에 attrs가 존재하기 때문이다.
-//     setup(props, context) {
-//         console.log(context.attrs.id);
+//     setup() {
 //         const count = ref(0);
-//         const msg = context.attrs.msg;
-//         return { count, msg };
+//         return { count };
 //     },
-//     // template라고 생각하고 작성하면 된다.
 //     template: `
-//     <h2>{{title}}</h2>
-//     <button @click="count++">
-//       You clicked me {{ count }} times.
-//     </button>
-//     <ol>
-//         <li v-for="(element, idx) in arr" :key="idx">{{element}}</li>
-//     </ol>
-//     <p>{{$attrs.msg}}</p>
+//         <h3 v-text="title"/>
+//         <li v-for="i in data" :key="i">{{ i }}</li>
 //     `,
 // });
-// // setup 함수에서 msg를 정의하고, template에 msg를 호출해도 되고, setup함수에서 정의하지 않고 $attrs.msg를 사용해도 msg를 호출 할 수 있다.
-// app.mount("#components-demo");
+
+// // app을 index.html의 id값이 app인 엘리먼트에 장착
+// app.mount("#app");
